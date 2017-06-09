@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Changing styles</title>
+  <style>
+  </style>
+
+</head>
+<body>
+
+  <script>
+  (function(){
+
+    function getPage(){
+      //console.dir(window.location);
+
+      console.log("taki jest search: ", window.location.search);
+
+      var nrStronyRegExp = /\?page=([\d]+)/;
+      console.log("Takiego mam matcha ", window.location.search.match(nrStronyRegExp));
+      
+      var nrStrony = window.location.search.match(nrStronyRegExp)[1];
+
+      nrStrony = parseInt(nrStrony);
+
+      console.log("----------wewnetrzhny nr strony", nrStrony);
+
+      if(nrStrony) {
+        return nrStrony;
+      }
+
+      return null;
+    }
+
+    console.log("nr storny ", getPage());
+
+    // dla adresu np. http://localhost/test/?page=2
+    getPage(); // zwraca 2 
+    // dla adresu np. http://localhost/test/
+    getPage(); // zwraca null
+    // dla adresu np. http://localhost/test/?page=nieliczba
+    getPage(); // zwraca null
+  })();
+  </script>
+</body>
+</html>

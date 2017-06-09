@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+    <meta charset="utf-8">
+    <title>KURS JS</title>
+    <style>
+    </style>
+    </meta>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    </head>
+<body>
+<div id="listaOsob"></div>
+<button id="pobierzListe">Pobierz listę osób</button>
+<script>
+    (function () {
+        function destructOsobe(osoba) {
+            const {
+            name,
+                username,
+                email,
+                address: {
+                geo: geo
+            },
+                // address.geo[1]: geo1, 
+                website,
+                company: {
+                name: company
+            },
+        } = osoba;
+
+        return $(`<li>
+        <p>Imię: ${name}</p>
+        <p>Nazwisko: ${username}</p>
+        <p>Firma: ${company}</p>
+        <p>Email: ${email}</p>
+        <p>Strona: ${website}</p>
+        <p><a href="http://bing.com/maps/default.aspx?cp=${geo[0]}~${geo[1]}">
+            Pokaż na mapie
+        </a></p>
+        </li>`);
+    }
+
+    function getJSON(url, onSuccess, onFail) {
+
+        function wczytanieDanych() {
+            var dane = JSON.parse(this.responseText);
+            onSuccess(dane);
+        }
+
+        function obslugaBledu() {
+            onFail("Wystapil blad");
+        }
+
+        var oReq = new XMLHttpRequest();
+        oReq.addEventListener("load", wczytanieDanych);
+        oReq.addEventListener("error", obslugaBledu);
+        oReq.open("GET", url);
+        oReq.setRequestHeader('Accept', 'application/json');
+        oReq.send();
+    }
+
+    function pobierzListeOsob() {
+        getJSON("http://code.eduweb.pl/bootcamp/json/", function (data) {
+            console.log("Sukces");
+            console.log(data);
+
+            var listaOsob = $('<ul></ul>');
+
+            data.forEach(function (osoba) {
+                listaOsob.append(destructOsobe(osoba));
+            });
+
+            $("#listaOsob").append(listaOsob);
+            // typeof data powinno zwrócić “object”
+        }, function (err) {
+            console.log("Wystąpił błąd!");
+            console.log(err);
+        });
+    }
+
+
+    $(document).ready(function() {
+        $('#pobierzListe').click(pobierzListeOsob);
+    });
+
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>KURS JS</title>
+        <style>
+        </style>
+
+    </head>
+    <body>
+      <header>
+      <div id="result">
+          <h1>Ex. 2</h1>
+          <hr noshade="noshade" />
+      </div>
+    </header>
+      <button id="button">Hide</button>
+
+      <div id="section">Ja sie ukryje</div>
+
+        <script>
+
+        (function(){
+          
+          function Toggler(selektor){
+            this.elem = document.querySelector(selektor);
+          }
+
+          Toggler.prototype.getElem = function(){
+            return this.elem;
+          };
+
+          Toggler.prototype.hide = function(){
+            this.elem.style.display = "none";
+          };
+
+
+          Toggler.prototype.show = function(){
+            this.elem.style.display = "block";
+          };
+
+            var elem = new Toggler("#section");
+            var button = document.querySelector("#button");
+
+            button.addEventListener("click", function() {
+
+                if(elem.getElem().style.display == "none") {
+                    elem.show();
+                } else {
+                    elem.hide();
+                }
+
+            }, false);
+        })();
+
+        </script>
+    </body>
+</html>

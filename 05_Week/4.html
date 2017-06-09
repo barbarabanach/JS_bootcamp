@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+    <title>KURS JS</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+<body>
+    <script>
+        function getRandom(min, max) {
+            return Math.round(Math.random() * (max - min) + min);
+    }
+
+        function *randoms(amount) {
+            for (let i = 0; i < amount; i++) {
+                yield getRandom(1, 49);
+        }
+    }
+
+        class Lotek {
+            constructor() {
+                this.getNumbers();
+        }
+
+            getNumbers() {
+                // wylosul numery
+                this.numbers = [...randoms(6)];
+
+                console.log(this.numbers);
+            }
+
+            checkNumbers(...numbers) {
+                const trafione = numbers.filter((number) => {
+                    return this.numbers.includes(number);
+                });
+
+                return {
+                    numbers: trafione,
+                    count: trafione.length
+                }
+            }
+
+            [Symbol.iterator]() {
+                let i = 0;
+                let numbers = this.numbers;
+
+                return {
+                    next() {
+                        return {
+                            done: (i === numbers.length) ? true : false,
+                            value: numbers[i++],
+                        }
+                    }
+                }
+            }
+        }
+
+        let shot = new Lotek();
+
+        let results = shot.checkNumbers(2, 13, 15, 22, 34, 40);
+        // zwraca np. { numbers: [13, 22], count: 2 }
+
+        // tablica ze wszystkimi wylosowanymi liczbami
+        let numbers = [...shot];
+
+        // wyświetla kolejno wylosowane liczby
+        for (let number of shot) {
+            console.log(number);
+        }
+    </script>
+</body>
+</html>

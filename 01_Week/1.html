@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>KURS JS</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script>
+        
+        var amountOfShopping= prompt("How many books you bought?"); 
+        var priceOfBook = prompt("What is the price of book?");
+
+        var discount = 0;
+
+
+        if(amountOfShopping >= 5 && amountOfShopping <= 20) {
+
+            discount=0.05;
+        } else if(amountOfShopping >= 21 && amountOfShopping <= 50) {
+
+            discount=0.10;
+        } else if(amountOfShopping >= 51 && amountOfShopping <= 100){
+
+            discount=0.15;
+        } else if(amountOfShopping > 100) {
+
+            discount=0.20;
+        }
+
+        console.log("New price of book is :", priceOfBook - (priceOfBook * discount));
+    </script>
+    </head>
+    <body>
+    </body>
+</html>

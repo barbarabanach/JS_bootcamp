@@ -1,0 +1,16 @@
+.hidden {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+.content {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    border-radius: 3px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

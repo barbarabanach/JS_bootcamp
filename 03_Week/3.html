@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <title>Changing styles</title>
+  <style>
+  </style>
+</head>
+  <body>
+    <script>
+        (function(){
+
+        function fetch(url, onSuccess, onFail){
+
+          function wczytanieDanych () {
+            console.log(this.responseText);
+          }
+
+          function obslugaBledu () {
+            console.log("Wystapil blad");
+          }
+
+
+          var oReq = new XMLHttpRequest();
+          oReq.addEventListener("load", wczytanieDanych);
+          oReq.addEventListener("error", obslugaBledu);
+          oReq.open("GET", url);
+            // oReq.open("GET", "http://code.eduweb.pl/bootcamp/users/");
+          oReq.send();
+
+        }
+
+          fetch("http://code.eduweb.pl/bootcamp/users/", function(data) {
+          console.log("Sukces");
+          console.log(data);
+      }, function(err) {
+          console.log("Wystąpił błąd!");
+          console.log(err);
+      });
+  })();
+
+    </script>
+</body>
+</html>
